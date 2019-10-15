@@ -1,0 +1,13 @@
+.header{
+    padding: 20px 0;
+}
+
+.news-title{
+    border-bottom: 1px solid;
+    padding-bottom: 20px; 
+    margin: 20px 0 40px;
+}
+
+.post{
+    margin-bottom: 40px;
+}

@@ -1,0 +1,13 @@
+.movie-banner{
+    height: 480px;
+    width: 1024px;
+    margin: 10px 0;
+}
+
+.movie-detail{
+    display: flex;
+}
+
+.poster-info{
+    margin-right: 20px;
+}
