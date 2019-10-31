@@ -15,10 +15,10 @@ class MovieController extends Controller
 	private $img='https://image.tmdb.org/t/p/w220_and_h330_face/';
 
 	public function index(){
-		return view('admin.index');
+		return view('user.index');
 	}
 	public function list(){
-		$movies = Movie::select('movies.*');
+		$movies = Movie::select('movies.*')->where('user_id',Auth::id());
 		return Datatables::of($movies)
 		->addColumn('action', function ($movie) {
 			return'
