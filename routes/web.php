@@ -32,7 +32,7 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
 	Route::get('/home', 'AdminController@index')->name('admin.home');
 	Route::get('/movies', 'MovieController@index')->name('admin.movies');
 	Route::get('/movies', 'MovieController@index')->name('admin.movies');
-	Route::get('/movie/list', 'MovieController@list')->name('list.key');
+	Route::get('/movie/list', 'MovieController@list')->name('admin.list.key');
 	Route::post('/movie/store', 'MovieController@store');
 	Route::delete('/movie/{id}', 'MovieController@delete');
 
@@ -45,9 +45,9 @@ Route::middleware('admin')->prefix('/admin')->group(function() {
 
 Route::middleware('auth')->prefix('/')->group(function() {
 
-	Route::get('/movies', 'MovieController@index')->name('admin.movies');
+	Route::get('/movies', 'MovieController@index')->name('movies');
 
-	Route::get('/movies', 'MovieController@index')->name('admin.movies');
+	Route::get('/movies', 'MovieController@index')->name('movies');
 
 
 	Route::get('/movie/list', 'MovieController@list')->name('list.key');

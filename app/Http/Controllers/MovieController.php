@@ -22,7 +22,6 @@ class MovieController extends Controller
 		return Datatables::of($movies)
 		->addColumn('action', function ($movie) {
 			return'
-			<button type="button" class="btn btn-xs btn-warning"data-toggle="modal" onclick="getMovies('.$movie['id'].')" href="#editProduct"><i class="fa fa-pencil" aria-hidden="true"></i></button>
 			<button type="button" class="btn btn-xs btn-danger" onclick="alDelete('.$movie['id'].')"><i class="fa fa-trash" aria-hidden="true"></i></button>';
 		}) 
 		->editColumn('image',function(Movie $movie){
@@ -34,7 +33,7 @@ class MovieController extends Controller
 	}
 
 	public function data(){
-		$movies = Movie::select('movies.*')->orderBy('updated_at', 'desc');
+		$movies = Movie::select(['id','key','title','image','description','rate','created_at','updated_at'])->orderBy('updated_at', 'desc');
 		 return Datatables::of($movies);
 	}
 
@@ -43,10 +42,20 @@ class MovieController extends Controller
 		return response()->json(Movie::find($id));
 	}
 
+	public function setRate(Request $request){
+		
+		$data= Movie::find($request->id);
+		$data['rate'] = ($data['rate']*$data['vote']+$data['rate'])/($data['vote']+1);
+		$data['vote'] =  $data['vote']+1;
+		$data.save();
+	}
 
 	public function store(Request $request){
 
 		$data = $this->getInfo($request->key);
+		if ($data==false) {
+			return response($content = 'key is not exist', $status = 500);
+		}
 		$store=[];
 		$store['key'] = $data->id;
 		$store['title'] = $data->title;
@@ -72,7 +81,7 @@ class MovieController extends Controller
 	protected function getInfo($key){
 		$url=  $this->server.$key.$this->api_key;
 		$result = file_get_contents($url);
-		if ($result === FALSE) {return 'false';}
+		if ($result === FALSE) {return false;}
 		$result=str_replace('},]',"}]",$result);
 		return json_decode($result);
 	}

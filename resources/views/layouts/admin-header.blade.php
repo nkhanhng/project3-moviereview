@@ -61,7 +61,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="{{ asset('admin/posts') }}" class="logo">
+    <a href="{{ asset('admin/') }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -93,7 +93,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="#" class="img-circle" alt="User Image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -164,13 +164,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="#" class="user-image" alt="User Image">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png" class="user-image" alt="User Image">
               <span class="hidden-xs">{{Auth::guard('admin')->user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="#" class="img-circle" alt="User Image">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png" class="img-circle" alt="User Image">
 
                 <p>
                  aa{{Auth::guard('admin')->user()->name}}aa
@@ -229,7 +229,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="#" class="img-circle" alt="User Image">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{Auth::guard('admin')->user()->name}}</p>
@@ -251,41 +251,8 @@
        <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="{{ asset('admin/products') }}">
-            <i class="fa fa-product-hunt"></i> <span>Products</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('admin/categories') }}">
-            <i class="fa fa-bars"></i> <span>Category</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('admin/users') }}">
-            <i class="fa fa-users"></i> <span>Users</span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('admin/colors') }}">
-            <i class="fa fa-dashboard"></i> <span>Colors</span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('admin/sizes') }}">
-            <i class="fa fa-superpowers"></i> <span>Size</span>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('admin/vendors') }}">
-            <i class="fa fa-archive"></i> <span>Vendor</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('admin/orders') }}">
-            <i class="fa fa-cart-arrow-down"></i> <span>Order</span>
+          <a href="{{ asset('admin/movies') }}">
+            <i class="fa fa-product-hunt"></i> <span>Movies</span>
           </a>
         </li>
       </ul>

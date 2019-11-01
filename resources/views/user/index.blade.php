@@ -106,7 +106,7 @@
       order: [[ 2, "desc" ]],
       ajax: '{!! route('list.key') !!}',
       columns: [
-      { data: 'id', name: 'id' },
+      { data: 'key', name: 'key' },
       { data: 'image', name: 'image' },
       { data: 'title', name: 'title' },
       { data: 'rate', name: 'rate' },
@@ -143,94 +143,6 @@ $('#StoreBtn').on('click',function(e){
 
 
 })
-
-
-  // delete post
-
-  $(document).on('click','.btn-danger',function(){
-    var id=$(this).data('id');
-    var btn=$(this);
-    $.ajax({
-      type:'delete',
-      url:'categories/'+id,
-      success:function(response){
-        btn.parent().parent().remove();
-        toastr.success(response.message);
-      }
-    });
-  });
-
-  // get data for form update
-
-      // Update function
-      $('#UpdateBtn').on('click',function(e){
-        e.preventDefault();
-        var id=$('#eid').val();
-        console.log(id);
-        $.ajax({
-          type:'post',
-          url: "{{ asset('categories/update') }}",
-          data:{
-            name:$('#ename').val(),
-            parent_id:$('#eparent_id').val(),
-            sort_order:$('#esort_order').val(),
-            id:$('#eid').val(),
-          },
-          success: function(response){
-            setTimeout(function () {
-              toastr.success(response.name+'has been added');
-
-            },1000);
-
-            $('#editProduct').modal('hide');
-          }, error: function (xhr, ajaxOptions, thrownError) {
-            if (!checkNull(xhr.responseJSON.errors)) {
-              console.log(xhr.responseJSON.errors);
-              $('p#sperrors').remove();
-              if(!checkNull(xhr.responseJSON.errors.name))
-              {
-                for (var i = 0; i < xhr.responseJSON.errors.name.length; i++) {
-                  var html='<p id="sperrors" style="color:red">'+xhr.responseJSON.errors.name[i]+'</p>';
-
-                  $(html).insertAfter('#name');
-                }
-              };
-              if(!checkNull(xhr.responseJSON.errors.sort_order))
-              {
-                for (var i = 0; i < xhr.responseJSON.errors.sort_order.length; i++) {
-                  var html='<p id="sperrors" style="color:red">'+xhr.responseJSON.errors.sort_order[i]+'</p>';
-                  console.log(html);
-                  $(html).insertAfter('#sort_order');
-                }
-              };
-            }
-            toastr.error(xhr.responseJSON.message);
-
-          },
-
-        })
-      });
-      function getProduct(id) {
-        console.log(id);
-        // $('#editPost').modal('show');
-
-        $.ajax({
-          type: "GET",
-          url: "categories/edit/" + id,
-
-          success: function(response)
-          { console.log(response);
-            $('#ename').val(response.name);
-            $('#eparent_id').val(response.parent_id);
-            $('#esort_order').val(response.sort_order);
-            $('#eid').val(response.id);
-          },
-          error: function (xhr, ajaxOptions, thrownError) {
-            toastr.error(thrownError);
-          }
-        });
-
-      }
 
       // Delete function
       function alDelete(id){
