@@ -18,7 +18,7 @@ class CreateMoviesTable extends Migration
             $table->bigInteger('key')->unique();
             $table->string('image');
             $table->string('title');
-            $table->string('description');
+            $table->string('description',5000);
             $table->double('rate', 3, 1);
             $table->integer('vote');
             $table->integer('user_id');
