@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./home.css">
+    <title>Project 3</title>
+</head>
+<style>
+.news-tag {
+ display: inline;
+ position: relative;
+ background-color: #242d35;
+ border: 1px solid #303840;
+ border-radius: 2px;
+ color: #9ab;
+}
+
+.news-tagbar {
+  padding: 0px;
+}
+
+.comment {
+  margin-bottom: 5px;
+}
+</style>
+<body>
+    <div class="header container">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Movies</a>
+            </li>
+            <li class="nav-item">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Register</a>
+            </li>
+        </ul>
+    </div>
+   
+    <div class="app-body container">
+        <div class="col-lg-2 title-bar">
+        </div>
+        <div class="col-lg-10 news-contain container">
+          <h1 class="news-title text-center">
+            News title
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+           
+          </p>
+
+            <img class="img-fluid" style=" display:block; margin: auto" src="https://via.placeholder.com/300/09f/fff.png">
+           
+           <p>
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+           </p>
+                   <ul class="news-tagbar">
+            <li class="news-tag">AAA</li>
+            <li class="news-tag">BBB</li>
+            <li class="news-tag">CCC</li>
+            <li class="news-tag">DDD</li>
+        </ul>
+        </div>
+      <div class="container send-comment" style="height:120px">
+              <textarea placeholder="Viết bình luận của bạn..." style="height: 73px; overflow-y: hidden;  width: 100%"></textarea>
+        <button class="btn btn-success" style="float: right; overflow: hidden">
+          Gửi
+        </button>
+      </div>
+      <div class="comment-area">
+        <div class="comment">
+                 <small>Comment 1</small>
+            <div class="movie-des">
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            </div>
+        </div>
+        <div class="comment">
+                 <small>Comment 1</small>
+            <div class="movie-des">
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            </div>
+        </div>
+        <div class="comment">
+                 <small>Comment 1</small>
+            <div class="movie-des">
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            </div>
+        </div>
+      </div>
+
+    </div>
+ 
+ 
+
+    <footer>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/">Project3</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+</body>
+
+</html>
