@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
+    
+    use AuthenticatesUsers;
    /**
      * Show the application’s login form.
      *
@@ -23,13 +25,12 @@ class AdminLoginController extends Controller
         return Auth::guard('admin');
     }
     
-    use AuthenticatesUsers;
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/admin/home';
+    protected $redirectTo = '/admin/movies';
     /**
      * Create a new controller instance.
      *

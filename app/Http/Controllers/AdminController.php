@@ -8,7 +8,7 @@ use App\Movie;
 use Yajra\Datatables\Datatables;
 class AdminController extends Controller
 {
-  public function __construct()
+	public function __construct()
     {
         $this->middleware('auth:admin');
     }
