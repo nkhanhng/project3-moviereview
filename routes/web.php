@@ -31,9 +31,9 @@ Route::prefix('/admin')->group(function() {
 
 	Route::get('/home', 'AdminController@index')->name('admin.home');
 	Route::get('/movies', 'AdminController@index')->name('admin.movies');
-	Route::get('/movie/list', 'MovieController@list')->name('admin.list.key');
-	Route::post('/movie/store', 'MovieController@store');
-	Route::delete('/movie/{id}', 'MovieController@delete');
+	Route::get('/movie/list', 'AdminController@list')->name('admin.list.key');
+	Route::post('/movie/status', 'AdminController@status')->name('admin.status');
+	Route::delete('/movie/{id}', 'AdminController@delete');
 	Route::post('/logout', 'AuthAdmin\AdminLoginController@logout')->name('admin.logout');
 });
 

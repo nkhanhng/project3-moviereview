@@ -27,13 +27,19 @@ class MovieController extends Controller
 		->editColumn('image',function(Movie $movie){
 			return '<img src="'.$movie->image.'" class="image-movie" />';
 		})
-		->rawColumns(['action','image'])
+		->editColumn('status',function($movie){
+			if ($movie->status) {
+				return'<input type="radio"  checked="checked" disabled="disabled"/>';
+			}
+			return'<input type="radio"  disabled="disabled"/>';
+		})
+		->rawColumns(['action','image','status'])
 		->setRowId('movies-{{$id}}')
 		->make(true);
 	}
 
 	public function data(){
-		$movies = Movie::select(['id','key','title','image','description','rate','created_at','updated_at'])->orderBy('updated_at', 'desc');
+		$movies = Movie::select('movies.*')->where('status',1)->orderBy('status', 'desc');
 		 return Datatables::of($movies);
 	}
 

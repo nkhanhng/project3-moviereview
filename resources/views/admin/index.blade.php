@@ -19,11 +19,9 @@
 @section('content')
 
 <div class="container" style="width:100%">
-  <h2>Categories</h2>
+  <h2>Movies Manage of Admin</h2>
   <br />
 
-  <a href="#"  class="btn btn-info" data-toggle="modal" data-target="#create">+ Add </a>
-  <br><br>
   <table id="users-table" class="table table-striped">
     <thead class="flg">
       <tr>
@@ -31,6 +29,7 @@
         <th>Image</th>
         <th>Title</th>
         <th>Rate</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -100,7 +99,7 @@
 
 
     //Load Data to table
-   var tables= $('#users-table').DataTable({
+    var tables= $('#users-table').DataTable({
       processing: true,
       serverSide: true,
       order: [[ 2, "desc" ]],
@@ -110,42 +109,15 @@
       { data: 'image', name: 'image' },
       { data: 'title', name: 'title' },
       { data: 'rate', name: 'rate' },
+      { data: 'status', name: 'status' },
       { data: 'action', name: 'action' },
       ]
     });
 
 
 
-// Store new data
-
-$('#StoreBtn').on('click',function(e){
-  e.preventDefault();
-  $.ajax({
-    type:'post',
-    url:"{{asset('/movie/store')}}",
-    data:{
-      key:$('#key').val()
-    },
-    success:function(response){
-     console.log(response);
-     setTimeout(function () {toastr.success('Has been added')},1000);
-                // var data = JSON.parse(response).data;
-                tables.ajax.reload(null, false);
-                $('#create').modal('hide');
-
-              }, error: function (xhr, ajaxOptions, thrownError) {
-                toastr.error(xhr.responseJSON.message);
-              },
-
-            })
-});
-
-
-
-})
-
-
   // get data for form update
+})
 
       // Delete function
       function alDelete(id){
@@ -181,9 +153,33 @@ $('#StoreBtn').on('click',function(e){
           toastr.error("The delete operation has been aborted!");
         }
       });
-      };
+      }
       function checkNull(value){
         return (value == null || value === '');
       }
+      function setStatus(id) {
+        
+        $.ajax({
+          type:'post',
+          url:"{{asset('/admin/movie/status')}}",
+          data:{
+            id:id
+          },
+          success:function(response){
+           console.log(response);
+           setTimeout(function () {toastr.success('Has been status changed')},1000);
+                // var data = JSON.parse(response).data;
+                location.reload();
+
+              }, error: function (xhr, ajaxOptions, thrownError) {
+                toastr.error(xhr.responseJSON.message);
+              },
+
+            })
+
+      }
+
+      
+
     </script>
     @endsection

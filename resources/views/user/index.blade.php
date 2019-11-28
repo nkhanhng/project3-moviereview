@@ -19,7 +19,7 @@
 @section('content')
 
 <div class="container" style="width:100%">
-  <h2>Categories</h2>
+  <h2>Movies Manage of User</h2>
   <br />
 
   <a href="#"  class="btn btn-info" data-toggle="modal" data-target="#create">+ Add </a>
@@ -31,6 +31,7 @@
         <th>Image</th>
         <th>Title</th>
         <th>Rate</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -110,6 +111,7 @@
       { data: 'image', name: 'image' },
       { data: 'title', name: 'title' },
       { data: 'rate', name: 'rate' },
+      { data: 'status', name: 'status' },
       { data: 'action', name: 'action' },
       ]
     });

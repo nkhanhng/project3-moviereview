@@ -29,14 +29,31 @@ private $server = 'https://api.themoviedb.org/3/movie/';
 		->editColumn('image',function(Movie $movie){
 			return '<img src="'.$movie->image.'" class="image-movie" />';
 		})
-		->rawColumns(['action','image'])
+		->editColumn('status',function($movie){
+			if ($movie->status) {
+				return'<input type="radio" name="'.$movie->status.'" checked="checked" onchange="setStatus('.$movie['id'].')" />';
+			}
+			return'<input type="radio" name="'.$movie->status.'" onchange="setStatus('.$movie['id'].')"/>';
+		})
+		->rawColumns(['action','image','status'])
 		->setRowId('movies-{{$id}}')
 		->make(true);
 	}
 
 	public function data(){
-		$movies = Movie::select('movies.*')->orderBy('updated_at', 'desc');
+		$movies = Movie::select('movies.*')->orderBy('stauts', 'desc');
 		 return Datatables::of($movies);
+	}
+	public function status(Request $request){
+		$id = $request->id;
+		$data= Movie::find($id);
+		if ($data->status) {
+			$data->status=0;
+		}else{
+			$data->status=1;
+		}
+		$data->save();
+		return "true";
 	}
 
 	public function get($id){
