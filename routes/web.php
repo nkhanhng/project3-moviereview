@@ -45,11 +45,16 @@ Route::middleware('auth')->prefix('/')->group(function() {
 
 	Route::get('/home', 'MovieController@index')->name('home');
 	Route::get('/movies', 'MovieController@index')->name('movies');
-
-
 	Route::get('/movie/list', 'MovieController@list')->name('list.key');
-
 	Route::post('/movie/store', 'MovieController@store');
 	Route::delete('/movie/{id}', 'MovieController@delete');
+
+
+
+	Route::get('/posts', 'PostController@index')->name('posts');
+	// Route::get('/movies', 'MovieController@index')->name('movies');
+	Route::get('/post/lists', 'PostController@anyData')->name('posts.data');
+	// Route::post('/movie/store', 'MovieController@store');
+	// Route::delete('/movie/{id}', 'MovieController@delete');
 
 });
