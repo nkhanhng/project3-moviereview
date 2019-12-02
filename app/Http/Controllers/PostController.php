@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\PostUpdateRequest;
 use Yajra\Datatables\Datatables;
@@ -22,9 +23,14 @@ class PostController extends Controller
             
         })
         ->editColumn('image', '<img src="{{$image}}"/>')
+        ->editColumn('status',function($movie){
+            if ($movie->status) {
+                return'<input type="radio"  checked="checked" disabled="disabled"/>';
+            }
+            return'<input type="radio"  disabled="disabled"/>';
+        })
         ->setRowId('posts-{{$id}}')
-        ->editColumn('origin_cost', '{{ number_format($origin_cost)}}')
-        // ->rawColumns(['action'])
+        ->rawColumns(['action','image','status'])
         ->make(true);
 }
 
@@ -38,12 +44,12 @@ class PostController extends Controller
     }
     
     public function store(PostRequest $request) {
-        $image=$request->only(['image']);
+        $image=$request->file('images');
         $data=$request->only(['title','description','content']);
         $data['slug']=str_slug($data['title']);
         $data['user_id']=Auth::id();
-        $data['iamge']= 'http://'.request()->getHttpHost().'/images/post/'.time().$key.'.'.$image->getClientOriginalExtension();
-        $image->move(public_path('images/post'), $imageName);
+        $data['image']= 'http://'.request()->getHttpHost().'/images/post/'.time().'.'.$image->getClientOriginalExtension();
+        $image->move(public_path('images/post'), $data['image']);
         Post::create($data);
         return "true";
     

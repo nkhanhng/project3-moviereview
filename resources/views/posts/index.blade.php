@@ -2,12 +2,9 @@
 @section('css')
 <style type="text/css" media="screen">
 .half-form{
-  width: 50%;
+  margin:0 20px;
   padding: 10px;
   float: left;
-}
-.modal-dialog{
-  width: 100%;
 }
 </style>
 @endsection
@@ -28,6 +25,7 @@
         <th>Title</th>
         <th>Image</th>
         <th>Update</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -43,25 +41,16 @@
       </div>
       <div class="half-form">
        <div class="form-group">
-        <label for="">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Input field">
+        <label for="">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Input field">
       </div>
-      <div class="form-group">
-        <label for="">Origin Cost</label>
-        <input type="text" class="form-control" id="origin_cost" placeholder="Input field">
-      </div>
-      <div class="form-group">
-        <label for="">Sale Cost</label>
-        <input type="text" class="form-control" id="sale_cost" placeholder="Input field">
-      </div>
+     
    <div id="image_preview"></div>
    <div class="form-group">
     <label for="">Images</label>
-    <input type="file" id="files" class="form-control" name="file[]" multiple />
+    <input type="file" id="files" class="form-control" name="file" />
   </div>
 
-</div>                       
-<div class="half-form">
   <div class="form-group">
     <label for="">Descripton</label>
     <textarea name="description" id="description" class="form-control"></textarea>
@@ -81,7 +70,7 @@
 </div>
 {{-- edit product modal  --}}
 
-<div class="modal fade" id="editProduct">
+<div class="modal fade" id="editPost">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -90,28 +79,18 @@
       </div>
       <div class="half-form">
        <div class="form-group">
-        <label for="">Name</label>
-        <input type="text" class="form-control" id="ename" placeholder="Input field">
+        <label for="">Title</label>
+        <input type="text" class="form-control" id="etitle" placeholder="Input field">
       </div>
-      <div class="form-group">
-        <label for="">Origin Cost</label>
-        <input type="text" class="form-control" id="eorigin_cost" placeholder="Input field">
-      </div>
-      <div class="form-group">
-        <label for="">Sale Cost</label>
-        <input type="text" class="form-control" id="esale_cost" placeholder="Input field">
-      </div>
-  
+     
       <div id="eimage_preview">
 
       </div>
       <div class="form-group">
         <label for="">Images</label>
-        <input type="file" id="efiles" class="form-control" name="efiles[]" multiple />
+        <input type="file" id="efiles" class="form-control" name="efiles" />
       </div>
 
-    </div>                       
-    <div class="half-form">
       <div class="form-group">
         <label for="">Descripton</label>
         <textarea name="description" id="edescription"class="form-control"></textarea>
@@ -129,26 +108,7 @@
   </div>
 </div>
 </div>
-    {{-- ################################################
-                         Model Plus Data
-                         ################################################ --}}
-                         <div class="modal fade" id="plusData">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Modal title</h4>
-                              </div>
-                              <div class="modal-body">
-
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+   
  
                         @endsection
 
@@ -166,9 +126,10 @@
                               ajax: '{!! route('posts.data') !!}',
                               columns: [
                               { data: 'id', name: 'id' },
-                              { data: 'code', name: 'code' },
                               { data: 'title', name: 'title' },
+                              { data: 'image', name: 'image' },
                               { data: 'updated_at', name: 'updated_at' },
+                              { data: 'status', name: 'status' },
                               { data: 'action', name: 'action' },
                               ]
                             });
@@ -202,26 +163,23 @@
           $('#image_preview').append("<img class'img-responsive img' style='width:50px' src='"+URL.createObjectURL(event.target.files[i])+"'>");
         }
       });
+
+
+
         $('#StoreBtn').on('click',function(e){
           e.preventDefault();
           var content = CKEDITOR.instances.content.getData();
-          var files = document.getElementById('files').files;
+          var files = document.getElementById('files').files[0];
           
           var newPost = new FormData();
-          newPost.append('name',$('#name').val());
+          newPost.append('title',$('#title').val());
           newPost.append('description',$('#description').val());
           newPost.append('content',content);
-          newPost.append('vendor_id',$('#vendor').val());
-          newPost.append('category_id',$('#category_id').val());
-          newPost.append('sale_cost',$('#sale_cost').val());
-          newPost.append('origin_cost',$('#origin_cost').val());
           
-          for (var i = 0; i < files.length; i++) {
-            newPost.append('images[]',files[i]);
-          }
+            newPost.append('images',files);
           $.ajax({
             type:'post',
-            url:"product/store",
+            url:"post/store",
             data:newPost,
             dataType:'json',
             async:false,
@@ -232,89 +190,32 @@
              setTimeout(function () {
                toastr.success('has been added');
                   // window.location.href="";
-                  // 
                 },1000);
+
+                  location.reload();
                 // var data = JSON.parse(response).data;
-                var html=
-                '<tr id="product-'+response.id+'">'+
-                '<td>'+'#'+'</td>'+
-                '<td>'+response.code+'</td>'+
-                '<td>'+response.name+'</td>'+
-                '<td>'+response.origin_cost+'</td>'+
-                '<td>'+response.sale_cost+'</td>'+
-                '<td>'+response.updated_at+'</td>'+
-                '<td>'+
-                '<button type="button" class="btn btn-xs btn-success fa fa-plus" data-toggle="modal" href="#wareHousing" onclick="wareHousing('+response.id+')" ></button> '+
-                ' <button type="button" class="btn btn-xs btn-info" data-toggle="modal" href="#showProduct"><i class="fa fa-eye" aria-hidden="true"></i></button> '+
-                ' <button type="button" class="btn btn-xs btn-warning"data-toggle="modal" onclick="getProduct('+response.id+')" href="#editProduct"><i class="fa fa-pencil" aria-hidden="true"></i></button> '+
-                ' <button type="button" class="btn btn-xs btn-danger" onclick="alDelete('+response.id+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
-                '</td>'+
-                '</tr>';
-                console.log(html);
-                $('tbody').prepend(html);
-                $('#addProduct').modal('hide');
+                
               }, error: function (xhr, ajaxOptions, thrownError) {
                 console.log(xhr);
-                if (!checkNull(xhr.responseJSON)) {
-                  $('p#sperrors').hide();
-                  if(!checkNull(xhr.responseJSON.errors.name))
-                  {
-                    for (var i = 0; i < xhr.responseJSON.errors.name.length; i++) {
-                      var html='<p id="sperrors" style="color:red">'+xhr.responseJSON.errors.name[i]+'</p>';
-                      console.log(html);
-                      $(html).insertAfter('#name');
-                    }
-                  };
-                  if(!checkNull(xhr.responseJSON.errors.content))
-                  {
-                    for (var i = 0; i < xhr.responseJSON.errors.content.length; i++) {
-                      var html='<p id="sperrors" style="color:red">'+xhr.responseJSON.errors.content[i]+'</p>';
-                      console.log(html);
-                      $(html).insertAfter('#contentdiv');
-                    }
-                  };
-                  if(!checkNull(xhr.responseJSON.errors.description))
-                   {console.log('test ok');
-                 for (var i = 0; i < xhr.responseJSON.errors.description.length; i++) {
-                  var html='<p id="sperrors" style="color:red">'+xhr.responseJSON.errors.description[i]+'</p>';
-                  console.log(html);
-                  $(html).insertAfter('#description');
-                }
-              };
-              if(!checkNull(xhr.responseJSON.errors.sale_cost))
-              {
-                for (var i = 0; i < xhr.responseJSON.errors.sale_cost.length; i++) {
-                  var html='<p id="sperrors" style="color:red">'+xhr.responseJSON.errors.sale_cost[i]+'</p>';
-                  console.log(html);
-                  $(html).insertAfter('#tag');
-                }
-              }
-              if (!checkNull(xhr.responseJSON.message)) {
-                toastr.error(xhr.responseJSON.message);
-              }
-            };
+                toastr.errors(xhr);
           },
         })
         });
+
+
 $('#UpdateBtn').on('click',function(e){
   e.preventDefault();
   var econtent = CKEDITOR.instances.econtent.getData();
-  var efiles = document.getElementById('efiles').files;
+  var efiles = document.getElementById('efiles').files[0];
   var updatePost = new FormData();
   updatePost.append('id',$('#eid').val());
-  updatePost.append('name',$('#ename').val());
+  updatePost.append('title',$('#etitle').val());
   updatePost.append('description',$('#edescription').val());
   updatePost.append('content',econtent);
-  updatePost.append('vendor_id',$('#evendor').val());
-  updatePost.append('category_id',$('#ecategory_id').val());
-  updatePost.append('sale_cost',$('#esale_cost').val());
-  updatePost.append('origin_cost',$('#eorigin_cost').val());
-  console.log(updatePost);
-  for (var i = 0; i < efiles.length; i++) {
-    updatePost.append('images[]',efiles[i]);
-  }  $.ajax({
+  updatePost.append('images',efiles);
+   $.ajax({
     type:'post',
-    url: "product/update",
+    url: "{{asset('post/update')}}",
     data:updatePost,
     dataType:'json',
     async:false,
@@ -327,22 +228,9 @@ $('#UpdateBtn').on('click',function(e){
           toastr.success(response.name+'has been added');
           // window.location.href="";
         },1000);
-        
-        $('#editProduct').modal('hide');
-        var html=
-        '<td>'+'#'+'</td>'+
-        '<td>'+response.code+'</td>'+
-        '<td>'+response.name+'</td>'+
-        '<td>'+response.origin_cost+'</td>'+
-        '<td>'+response.sale_cost+'</td>'+
-        '<td>'+response.updated_at+'</td>'+
-        '<td>'+
-        '<button type="button" class="btn btn-xs btn-success fa fa-plus" data-toggle="modal" href="#wareHousing" onclick="wareHousing('+response.id+')" ></button> '+
-        ' <button type="button" class="btn btn-xs btn-info" data-toggle="modal" href="#showProduct"><i class="fa fa-eye" aria-hidden="true"></i></button> '+
-        ' <button type="button" class="btn btn-xs btn-warning"data-toggle="modal" onclick="getProduct('+response.id+')" href="#editProduct"><i class="fa fa-pencil" aria-hidden="true"></i></button> '+
-        ' <button type="button" class="btn btn-xs btn-danger" onclick="alDelete('+response.id+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
-        '</td>';
-        $('#product-'+response.id).html(html);
+
+        location.reload();
+     
       },  error: function (xhr, ajaxOptions, thrownError) {
         $("p.sperrors").replaceWith("");
         if (!checkNull(xhr.responseJSON)) {
@@ -392,129 +280,26 @@ function plusData(id) {$.ajax({
 });
 }
   // get data for form update
-  function getProduct(id) {
-    console.log(id);
-        // $('#editPost').modal('show');
+  function get(id) {
         $.ajax({
           type: "GET",
-          url: "{{ asset('admin/getProduct') }}/"+id,
+          url: "{{ asset('post/get') }}/"+id,
           success: function(response)
           {
             $('#eimage_preview').html("");
             CKEDITOR.instances.econtent.setData(response.content);
-            $('#ename').val(response.name);
+            $('#etitle').val(response.title);
             $('#edescription').val(response.description);
-            $("#esale_cost").val(response.sale_cost);
-            $('#eorigin_cost').val(response.origin_cost);
-            $('#evendor').val(response.vendor_id);
-            $('#ecategory_id').val(response.category_id);
             $('#eid').val(response.id);
-            for (var i = 0; i < response.images.length; i++) {
-             html="<img src='"+response.images[i].link+"' class='img-responsive img' style='display:inline-block;width:50px'>";
+             html="<img src='"+response.image+"' class='img-responsive img' style='display:inline-block;width:50px'>";
              $('#eimage_preview').append(html);
-           }         
          },
          error: function (xhr, ajaxOptions, thrownError) {
           toastr.error(thrownError);
         }
       });
       }
-      $('#storeWareHousing').on('click',function(){
-       $.ajax({
-        type: "post",
-        url: "{{ asset('admin/wareHousing/storewareHousing') }}",
-        data:{
-          product_id:$('#product_id').val(),
-          color_id:$('#color_id').val(),
-          quantity:$('#quantity').val(),
-          size_id:$('#size_id').val(),
-        },
-        success: function(response)
-        {
-          console.log(response);
-          $('#AddWareHousing').modal('hide');
-          var html=
-          '<table class="table table-bordered">'+ 
-          '<thead>'+
-          '<tr>'+
-          '<th>ID</th>'+
-          '<th>Color</th>'+
-          '<th>Size</th>'+
-          '<th>Quantity</th>'+
-          '<th>Action</th>'+
-          '</tr>'+
-          '</thead>'
-          +'<tbody>';
-          var tbody="";
-          for (var i = 0; i < response.length; i++) {
-           tbody=tbody+'<tr id="wareHousing-'+response[1][i].id+'">'+'<td>'+response[i].id+'</td>'+ 
-           '<td>'+response[i].color_id+'</td>'+
-           '<td>'+response[i].size_id+'</td>'+ 
-           '<td>'+response[i].quantity+'</td>'+
-           '<td>'+
-           '<button type="button" class="btn btn-xs btn-success fa fa-plus" onclick="plusData('+response[i].id+')" data-toggle="modal" href="#wareHousing"></button> '+
-           ' <button type="button" class="btn btn-xs btn-warning"data-toggle="modal" onclick="getProduct('+response[i].id+')" href="#editProduct"><i class="fa fa-pencil" aria-hidden="true"></i></button> '+
-           ' <button type="button" class="btn btn-xs btn-danger" onclick="wareHousingDelete('+response[i].id+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+ 
-           '</tr>';
-         }
-         html=html+tbody+'</tbody>'+'</table>';
-         $('#allWareHousing').html(html);
-         
-       },
-       error: function (xhr, ajaxOptions, thrownError) {
-        toastr.error(thrownError);
-      }
-    });
-       
-     })
-      function wareHousing(id) {
-        // $('#editPost').modal('show');
-        $('#product_id').val(id);
-        $.ajax({
-          type: "GET",
-          url: "wareHousing/"+id,
-          success: function(response)
-          {
-            var title=response[0].code+'-'+response[0].name;
-            $('#productTitle').html(title);
-            $('input#codeWareHousing').val(response[0].code);
-            if (!checkNull(response[1])) {
-              var html=
-              '<table class="table table-bordered">'+ 
-              '<thead>'+
-              '<tr>'+
-              '<th>ID</th>'+
-              '<th>Color</th>'+
-              '<th>Size</th>'+
-              '<th>Quantity</th>'+
-              '<th>Action</th>'+
-              '</tr>'+
-              '</thead>'
-              +'<tbody>';
-              var tbody="";
-              for (var i = 0; i < response[1].length; i++) {
-               tbody=tbody+'<tr id="wareHousing-'+response[1][i].id+'">'+'<td>'+response[1][i].id+'</td>'+ 
-               '<td>'+response[1][i].color_id+'</td>'+
-               '<td>'+response[1][i].size_id+'</td>'+ 
-               '<td>'+response[1][i].quantity+'</td>'+
-               '<td>'+
-               '<button type="button" class="btn btn-xs btn-success fa fa-plus" onclick="plusData('+response[1][i].id+')" data-toggle="modal" href="#wareHousing"></button> '+
-               ' <button type="button" class="btn btn-xs btn-warning"data-toggle="modal" onclick="getProduct('+response[1][i].id+')" href="#editProduct"><i class="fa fa-pencil" aria-hidden="true"></i></button> '+
-               ' <button type="button" class="btn btn-xs btn-danger" onclick="wareHousingDelete('+response[1][i].id+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+ 
-               '</tr>';
-             }
-             html=html+tbody+'</tbody>'+'</table>';
-             $('#allWareHousing').html(html);
-           }else{
-            var html='<h2>Chưa Có Sản Phẩm Nào Đang Tồn Kho</h2>';
-            $('#allWareHousing').html(html);
-          }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          toastr.error(thrownError);
-        }
-      });
-      }
+     
     // Update function
       // Delete function
       function alDelete(id){

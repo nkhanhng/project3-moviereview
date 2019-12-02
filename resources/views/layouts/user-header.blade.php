@@ -251,8 +251,13 @@
        <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="{{ asset('admin/movies') }}">
+          <a href="{{ asset('movies') }}">
             <i class="fa fa-product-hunt"></i> <span>Movies</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ asset('posts') }}">
+            <i class="fa fa-product-hunt"></i> <span>Posts</span>
           </a>
         </li>
       </ul>

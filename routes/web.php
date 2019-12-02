@@ -52,9 +52,9 @@ Route::middleware('auth')->prefix('/')->group(function() {
 
 
 	Route::get('/posts', 'PostController@index')->name('posts');
-	// Route::get('/movies', 'MovieController@index')->name('movies');
+	Route::get('/post/get/{id}', 'PostController@getPost')->name('posts.details');
 	Route::get('/post/lists', 'PostController@anyData')->name('posts.data');
-	// Route::post('/movie/store', 'MovieController@store');
+	Route::post('/post/store', 'PostController@store');
 	// Route::delete('/movie/{id}', 'MovieController@delete');
 
 });
