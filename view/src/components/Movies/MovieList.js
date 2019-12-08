@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 const MovieList = props => {
     return(
         <div className="app-body container">
-            {props.children}
+            {/* <div className="row row-cols-1 row-cols-md-3">
+            </div> */}
+            {props.children}    
         </div>
     )
 }
