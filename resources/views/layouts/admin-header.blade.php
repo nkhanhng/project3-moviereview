@@ -255,6 +255,11 @@
             <i class="fa fa-product-hunt"></i> <span>Movies</span>
           </a>
         </li>
+        <li>
+          <a href="{{ asset('admin/posts') }}">
+            <i class="fa fa-product-hunt"></i> <span>Posts</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
