@@ -6,6 +6,9 @@
   padding: 10px;
   float: left;
 }
+.image-movie{
+    max-width: 200px;
+  }
 </style>
 @endsection
 @section('content')
@@ -212,7 +215,7 @@ $('#UpdateBtn').on('click',function(e){
   updatePost.append('title',$('#etitle').val());
   updatePost.append('description',$('#edescription').val());
   updatePost.append('content',econtent);
-  updatePost.append('images',efiles);
+  updatePost.append('image',efiles);
    $.ajax({
     type:'post',
     url: "{{asset('post/update')}}",
@@ -225,7 +228,7 @@ $('#UpdateBtn').on('click',function(e){
       console.log(response);
         // var result = JSON.parse(response);
         setTimeout(function () {
-          toastr.success(response.name+'has been added');
+          toastr.success(response.name+'has been update');
           // window.location.href="";
         },1000);
 
@@ -317,15 +320,15 @@ function plusData(id) {$.ajax({
         if (isConfirm) {
           $.ajax({
             type: "delete",
-            url: "product/"+id,
+            url: "post/"+id,
             success: function(res)
             {
               if(!res.error) {
                 toastr.success('Xóa thành công!');
                 $('#product-'+id).remove();
-                  //setTimeout(function () {
-                    //location.reload();
-                  //}, 1000)
+                  setTimeout(function () {
+                    location.reload();
+                  }, 1000)
                 }
               },
               error: function (xhr, ajaxOptions, thrownError) {

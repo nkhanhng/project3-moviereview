@@ -13,7 +13,7 @@ class PostController extends Controller
     }
     public function anyData(){
     
-        $datas = Post::select('posts.*');
+        $datas = Post::select('posts.*')->where('user_id',Auth::id())->orderBy('status', 'desc');
         return Datatables::of($datas)
         ->addColumn('action', function ($datas) {
             return'
@@ -22,7 +22,7 @@ class PostController extends Controller
             ';
             
         })
-        ->editColumn('image', '<img src="{{$image}}"/>')
+        ->editColumn('image', '<img src="{{$image}}" class="image-movie" />')
         ->editColumn('status',function($movie){
             if ($movie->status) {
                 return'<input type="radio"  checked="checked" disabled="disabled"/>';
@@ -33,7 +33,10 @@ class PostController extends Controller
         ->rawColumns(['action','image','status'])
         ->make(true);
 }
-
+public function data(){
+        $movies = Post::select('posts.*')->where('status',1)->orderBy('updated_at', 'desc');
+         return Datatables::of($movies);
+    }
     public function getPost($id){
         $data=Post::find($id);
         return response()->json($data);
@@ -54,15 +57,19 @@ class PostController extends Controller
         return "true";
     
     }
-    public function updatePost(PostUpdateRequest $request) {
+    public function update(PostUpdateRequest $request) {
         $id=$request->only(['id']);
-        $image=$request->only(['image']);
         $data=$request->only(['title','description','content']);
-         if (!isempty($request['images'])) {
-            $data['iamge']= 'http://'.request()->getHttpHost().'/images/post/'.time().$key.'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images/post'), $imageName);
+         if ($request->hasFile('image')) {
+        $image=$request->file('image');
+            $data['image']= 'http://'.request()->getHttpHost().'/images/post/'.time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images/post'), $data['image']);
         }
         $boolean=Post::where('id',$id)->update($data);
             return "true";
+    }
+    public function delete($id){
+        Post::find($id)->delete();
+        return response()->json(true);
     }
 }

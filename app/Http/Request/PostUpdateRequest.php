@@ -20,7 +20,7 @@ class PostUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required',
+            'title'          => 'required',
             'description'   => 'required',
             'content'       => 'required',
             'id'   => 'required',
@@ -28,7 +28,7 @@ class PostUpdateRequest extends FormRequest
     }
     public function message(){
          return [
-            'name.required'         => 'The title is required ',
+            'title.required'         => 'The title is required ',
             'description.required'   => 'The description is required',
             'content.required'       => 'The content is required',
             'id.required'   => 'We have some exception',

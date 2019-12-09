@@ -35,6 +35,15 @@ Route::prefix('/admin')->group(function() {
 	Route::post('/movie/status', 'AdminController@status')->name('admin.status');
 	Route::delete('/movie/{id}', 'AdminController@delete');
 	Route::post('/logout', 'AuthAdmin\AdminLoginController@logout')->name('admin.logout');
+
+
+	Route::get('/posts', 'AdminPostController@index');
+	Route::get('/post/get/{id}', 'AdminPostController@getPost');
+	Route::get('/post/status/{id}', 'AdminPostController@setStatus');
+	Route::get('/post/lists', 'AdminPostController@anyData');
+	Route::post('/post/store', 'AdminPostController@store');
+	Route::post('/post/update', 'AdminPostController@update');
+	Route::delete('/post/{id}', 'AdminPostController@delete');
 });
 
 
@@ -55,6 +64,7 @@ Route::middleware('auth')->prefix('/')->group(function() {
 	Route::get('/post/get/{id}', 'PostController@getPost')->name('posts.details');
 	Route::get('/post/lists', 'PostController@anyData')->name('posts.data');
 	Route::post('/post/store', 'PostController@store');
-	// Route::delete('/movie/{id}', 'MovieController@delete');
+	Route::post('/post/update', 'PostController@update');
+	Route::delete('/post/{id}', 'PostController@delete');
 
 });
