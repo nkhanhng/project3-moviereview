@@ -1,3 +1,4 @@
 {
-    "API_KEY":"016a4db513f662a17a97292a0d99df49"
+    "API_KEY":"016a4db513f662a17a97292a0d99df49",
+    "MOVIEDB_URL": "https://api.themoviedb.org/3"
 }
