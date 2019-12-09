@@ -10,7 +10,7 @@ const Movies = props => {
     // const initialPage = 1;
     useEffect(() => {
         fetch(
-            `/movie/popular?api_key=${config.API_KEY}&language=en-US&page=${activePage}`
+            `${config.MOVIEDB_URL}/movie/popular?api_key=${config.API_KEY}&language=en-US&page=${activePage}`
         ).then(res => {
             res.json().then(data => {
                 setData(data.results);
@@ -22,7 +22,7 @@ const Movies = props => {
     const callApi = async pageNumber => {
         setActivePage(pageNumber)
         let response = await fetch(
-            `/movie/popular?api_key=${config.API_KEY}&language=en-US&page=${pageNumber}`,
+            `${config.MOVIEDB_URL}/movie/popular?api_key=${config.API_KEY}&language=en-US&page=${pageNumber}`,
             {
                 method: "GET",
                 headers: {
