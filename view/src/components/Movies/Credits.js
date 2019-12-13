@@ -4,7 +4,7 @@ import "./detail.css";
 
 const Credits = props => {
     const [data, setData] = useState([]);
-
+    const { info } = props;
     useEffect(() => {
         fetch(
             `${config.MOVIEDB_URL}/movie/${props.id}/credits?api_key=${config.API_KEY}`
@@ -12,14 +12,28 @@ const Credits = props => {
             res.json().then(data => setData(data));
         });
     }, []);
-    console.log(data);
+
+    const renderCast = () => {
+        if(data.cast){
+            const mainCast = data.cast.slice(0,5).map((character)=>{
+                return(
+                    <li key={character.cast_id}>{character.name}</li>
+                )
+            })
+            return mainCast;
+        }
+    }
 
     return (
         <div>
-            <small>Rated</small>
-            <small>The loai</small>
-            <small>Dao dien</small>
-            <small>Dien vien</small>
+            <div>Rated: {info.vote_average}</div>
+            <div>Thể loại: {props.renderGenres()}</div>
+            <div>Đạo diễn: {data.crew ? data.crew['12'].name :'loading'}</div>
+            <div>Diễn viên: 
+                <ul>
+                    {renderCast()}
+                </ul>
+            </div>
         </div>
     );
 };

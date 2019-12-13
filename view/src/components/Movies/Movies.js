@@ -42,22 +42,24 @@ const Movies = props => {
             return (
                 <div key={movie.id} className="col mb-4">
                     <div className="card" style={{ minWidth: "250px" }}>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
-                            className="card-img-top"
-                            alt="..."
-                        ></img>
-                        <div className="card-body">
-                            <h5
-                                className="card-title"
-                                style={{ fontSize: "16px" }}
-                            >
-                                {movie.title}
-                            </h5>
-                            <p className="card-text">
-                                IMDB score: {movie.vote_average}
-                            </p>
-                        </div>
+                        <a href={`/movie/${movie.id}`}>
+                            <img
+                                src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
+                                className="card-img-top"
+                                alt="..."
+                            ></img>
+                            <div className="card-body">
+                                <h5
+                                    className="card-title"
+                                    style={{ fontSize: "16px" }}
+                                >
+                                    {movie.title}
+                                </h5>
+                                <p className="card-text">
+                                    IMDB score: {movie.vote_average}
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             );

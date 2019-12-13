@@ -15,12 +15,11 @@ const MovieDetail = props => {
         });
     }, []);
 
-    console.log(data)
-
     const renderGenres = () => {
         if(data.genres){
             const genres = data.genres.map((genre) => {
-                return( <span>
+                return( 
+                <span key={genre.id}>
                     <small>{genre.name},</small>
                 </span>
                 )
@@ -48,7 +47,7 @@ const MovieDetail = props => {
                     <div className="movie-info">
                         <h3>Infomation</h3>
                         <div>
-                            <Credits id={id}/>
+                            <Credits renderGenres={renderGenres} info={data} id={id}/>
                         </div>
                     </div>
                 </div>
@@ -60,8 +59,8 @@ const MovieDetail = props => {
                         {data.overview}
                     </div>
                     <div className="rate-review">
-                        <bold>Danh gia</bold>
-                        <input type="text" placeholder="Binh luan" />
+                        <h4>Danh gia</h4>
+                        <textarea type="text" placeholder="Binh luan" />
                     </div>
                 </div>
             </div>
