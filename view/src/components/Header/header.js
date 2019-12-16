@@ -32,6 +32,16 @@ const Header = props => {
                                 News
                             </Link>
                         </li>
+                        <li className="nav-item" to="/news">
+                            <a href="http://localhost:8000/login" className="nav-link">
+                                Login
+                            </a>
+                        </li>
+                        <li className="nav-item" to="/news">
+                            <a href="http://localhost:8000/register" className="nav-link">
+                                Register
+                            </a>
+                        </li>
                     </ul>
                     {/* <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
