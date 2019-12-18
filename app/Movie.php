@@ -12,5 +12,8 @@ class Movie extends Model
         'key', 'image', 'title','description','rate','vote','user_id'
     ];
 
-
+     public function rates()
+    {
+        return $this->hasMany('App\Rate');
+    }
 }

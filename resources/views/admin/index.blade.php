@@ -1,4 +1,4 @@
-@extends('layouts.user-header')
+@extends('layouts.admin-header')
 @section('css')
 <style type="text/css" media="screen">
   .paginate_button{

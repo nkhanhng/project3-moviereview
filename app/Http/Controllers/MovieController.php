@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Movie;
+use App\Rate;
 use Yajra\Datatables\Datatables;
 
 class MovieController extends Controller
@@ -44,16 +45,20 @@ class MovieController extends Controller
 	}
 
 	public function get($id){
+		$movie= Movie::find($id)->rates;
 		
-		return response()->json(Movie::find($id));
+		return response()->json($movie);
 	}
 
 	public function setRate(Request $request){
 		
-		$data= Movie::find($request->id);
+		$setRate = $request->all();
+		$data= Movie::find($setRate['movie_id']);
 		$data['rate'] = ($data['rate']*$data['vote']+$data['rate'])/($data['vote']+1);
 		$data['vote'] =  $data['vote']+1;
-		$data.save();
+		$data->save();
+		Rate::create($setRate);
+		return "success";
 	}
 
 	public function store(Request $request){
