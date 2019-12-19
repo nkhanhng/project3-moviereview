@@ -27,7 +27,10 @@ Route::prefix('/v1')->group(function() {
  Route::get('/post/data', 'PostController@data')->name('post.api');
 
 
-// get list comment for id video
- http://localhost:8000/api/v1/movie/1
+// get list comment for id video.
+ // http://localhost:8000/api/v1/movie/{1}
  Route::get('/movie/{id}', 'MovieController@get')->name('get.moive');
+
+
+
 });

@@ -67,4 +67,6 @@ Route::middleware('auth')->prefix('/')->group(function() {
 	Route::post('/post/update', 'PostController@update');
 	Route::delete('/post/{id}', 'PostController@delete');
 
+
+ 	Route::get('/api/v1/user', 'HomeController@user')->name('get.user');
 });
