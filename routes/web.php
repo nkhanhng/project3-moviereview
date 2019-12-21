@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/', function(){return view('welcome');})->name('login');
 
 Auth::routes();
 
