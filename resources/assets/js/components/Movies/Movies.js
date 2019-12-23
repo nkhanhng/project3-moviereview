@@ -43,7 +43,7 @@ const Movies = props => {
             return (
                 <div key={movie.id} className="col mb-4">
                     <div className="card" style={{ minWidth: "250px" }}>
-                        <Link href={`/movie/${movie.id}`}>
+                        <Link to={`/movie/${movie.id}`}>
                             <img
                                 src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
                                 className="card-img-top"

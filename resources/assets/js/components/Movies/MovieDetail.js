@@ -30,7 +30,7 @@ const MovieDetail = props => {
     }
 
     return (
-        <div>
+        <div className="container">
             <img
                 src={`https://image.tmdb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
                 className="movie-banner"

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
 import HomeBody from './Home';
 import config from '../../config/config.json'
+import HomeNews from './HomeNews';
 
 
 const HomePage = props => {
@@ -41,6 +42,7 @@ const HomePage = props => {
             <div className="card-group">
                 {renderMovie()}
             </div>
+            <HomeNews/>
         </HomeBody>
     )
 }

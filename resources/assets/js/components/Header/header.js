@@ -11,7 +11,6 @@ const Header = props => {
             .then((data)=> setData(data))
         })
     },[])
-    console.log(data)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
@@ -45,7 +44,7 @@ const Header = props => {
                         {!data 
                         ? 
                             
-                            <div>
+                            <div style={{display:"flex"}}>
                                 <li className="nav-item" to="/news">
                                     <a href="http://localhost:8000/login" className="nav-link">
                                         Login
