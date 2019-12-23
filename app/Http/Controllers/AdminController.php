@@ -42,7 +42,7 @@ private $server = 'https://api.themoviedb.org/3/movie/';
 
 	public function data(){
 		$movies = Movie::select('movies.*')->orderBy('stauts', 'desc');
-		 return Datatables::of($movies);
+		 return  response()->json(Datatables::of($movies));
 	}
 	public function status(Request $request){
 		$id = $request->id;
