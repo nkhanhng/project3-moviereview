@@ -41,7 +41,7 @@ class MovieController extends Controller
 
 	public function data(){
 		$movies = Movie::select('movies.*')->where('status',1)->orderBy('status', 'desc');
-		 return Datatables::of($movies);
+		 return  response()->json(Datatables::of($movies));
 	}
 
 	public function get($id){

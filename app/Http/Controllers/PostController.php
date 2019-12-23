@@ -35,7 +35,7 @@ class PostController extends Controller
 }
 public function data(){
         $movies = Post::select('posts.*')->where('status',1)->orderBy('updated_at', 'desc');
-         return Datatables::of($movies);
+         return  response()->json(Datatables::of($movies));
     }
     public function getPost($id){
         $data=Post::find($id);
