@@ -68,5 +68,6 @@ Route::middleware('auth')->prefix('/')->group(function() {
 	Route::delete('/post/{id}', 'PostController@delete');
 
 
- 	Route::get('/api/v1/user', 'HomeController@user')->name('get.user');
+ 	
 });
+Route::get('/api/v1/user', 'HomeController@user')->name('get.user');

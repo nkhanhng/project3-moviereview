@@ -23,11 +23,11 @@ class PostController extends Controller
             
         })
         ->editColumn('image', '<img src="{{$image}}" class="image-movie" />')
-        ->editColumn('status',function($movie){
-            if ($movie->status) {
-                return'<input type="radio"  checked="checked" disabled="disabled"/>';
+        ->editColumn('status',function($datas){
+            if ($datas->status) {
+                return'<input type="checkbox"  onchange="setStatus('.$datas['id'].')" checked disabled />';
             }
-            return'<input type="radio"  disabled="disabled"/>';
+            return'<input type="checkbox" onchange="setStatus('.$datas['id'].')" disabled />';
         })
         ->setRowId('posts-{{$id}}')
         ->rawColumns(['action','image','status'])
