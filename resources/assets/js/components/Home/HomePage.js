@@ -19,7 +19,12 @@ const HomePage = props => {
             const trendingMovie = list.data.map((movie)=>{
                 return(
                     <div key={movie.id} className="card" style={{width: "18rem"}}>
-                        <Link to={`/movie/${movie.key}`}>
+                        <Link to={{
+                            pathname: `/movie/${movie.key}`,
+                            state:{
+                                movId: movie.id
+                            }
+                        }}>
                             <img src={`${movie.image}`}
                                 className="card-img-top" alt="..."></img>
                                 <div className="card-body">

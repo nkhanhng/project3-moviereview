@@ -3,9 +3,15 @@ import config from "../../config/config.json";
 import { useParams } from "react-router";
 import "./detail.css"
 import Credits from "./Credits.js";
+import axios from 'axios';
+import Comments from './Comments';
 
 const MovieDetail = props => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState('');
+    const [rate, setRate] = useState('');
+    const [comment, setComment] = useState('');
+    const { movId } = props.location.state
+
     let { id } = useParams();
     useEffect(() => {
         fetch(
@@ -14,6 +20,18 @@ const MovieDetail = props => {
             res.json().then(data => setData(data));
         });
     }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post(`${config.BACKEND_DOMAIN}/api/v1/movie/rate`,{
+            'movie_id': movId,
+            'score': rate,
+            'comment': comment,
+            'user_id': 1
+        }).then(data => console.log(data))
+        .catch(err => console.log(err))
+
+    }
 
     const renderGenres = () => {
         if(data.genres){
@@ -59,25 +77,25 @@ const MovieDetail = props => {
                         {data.overview}
                     </div>
                     <div className="rate-review">
-                        <form>
+                        <form onSubmit={(e)=>handleSubmit(e)}>
                             <h4>Danh gia</h4>
-                            <option>
-                            <select>
-                                <option value="grapefruit">Grapefruit</option>
-                                <option value="lime">Lime</option>
-                                <option selected value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
-                                <option value="grapefruit">Grapefruit</option>
-                                <option value="lime">Lime</option>
-                                <option selected value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
-                                <option value="grapefruit">Grapefruit</option>
-                                <option value="lime">Lime</option>
-                            </select>
-                            </option>
-                            <textarea type="text" name="comment" placeholder="Binh luan" />
+                                <select value={rate} onChange={(e)=>setRate(e.target.value)}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            <textarea type="text" name="comment" placeholder="Binh luan" onChange={(e)=>setComment(e.target.value)} />
+                            <input type="submit" value="Submit" />
                         </form>
                     </div>
+                    <Comments/>
                 </div>
             </div>
         </div>
