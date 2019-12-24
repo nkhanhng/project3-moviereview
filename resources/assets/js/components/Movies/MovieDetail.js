@@ -59,8 +59,24 @@ const MovieDetail = props => {
                         {data.overview}
                     </div>
                     <div className="rate-review">
-                        <h4>Danh gia</h4>
-                        <textarea type="text" placeholder="Binh luan" />
+                        <form>
+                            <h4>Danh gia</h4>
+                            <option>
+                            <select>
+                                <option value="grapefruit">Grapefruit</option>
+                                <option value="lime">Lime</option>
+                                <option selected value="coconut">Coconut</option>
+                                <option value="mango">Mango</option>
+                                <option value="grapefruit">Grapefruit</option>
+                                <option value="lime">Lime</option>
+                                <option selected value="coconut">Coconut</option>
+                                <option value="mango">Mango</option>
+                                <option value="grapefruit">Grapefruit</option>
+                                <option value="lime">Lime</option>
+                            </select>
+                            </option>
+                            <textarea type="text" name="comment" placeholder="Binh luan" />
+                        </form>
                     </div>
                 </div>
             </div>

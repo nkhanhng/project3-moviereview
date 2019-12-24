@@ -6,41 +6,54 @@ import HomeNews from './HomeNews';
 
 
 const HomePage = props => {
-    const [data, setData] = useState([])
+    const [data, setData] = useState('')
     
     useEffect(() => {
-        fetch(`${config.MOVIEDB_URL}/movie/now_playing?api_key=${config.API_KEY}&language=en-US&page=1`)
-        .then(res => {
-            res.json()
-            .then((data)=> setData(data.results))
-        })
+        axios.get(`${config.BACKEND_DOMAIN}/api/v1/movie/data?draw=1&start=0&length=9`)
+            .then(data => setData(data.data))
+            .catch(err => console.log(err))
     },[])
     
-
-    const renderMovie = () => {
-        const trendingMovie = data.slice(0,9).map((movie)=>{
-            return(
-                <div key={movie.id} className="card" style={{width: "18rem"}}>
-                    <Link to={`/movie/${movie.id}`}>
-                        <img src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
-                            className="card-img-top" alt="..."></img>
-                            <div className="card-body">
-                                <p className="card-text">
-                                    {movie.title}
-                                </p>
-                            </div>
-                    </Link>
-                </div>
-            )
-        })
-
-        return trendingMovie;
+    const renderMovie = (list) => {
+        if(list){
+            const trendingMovie = list.data.map((movie)=>{
+                return(
+                    <div key={movie.id} className="card" style={{width: "18rem"}}>
+                        <Link to={`/movie/${movie.key}`}>
+                            <img src={`${movie.image}`}
+                                className="card-img-top" alt="..."></img>
+                                <div className="card-body">
+                                    <p className="card-text">
+                                        {movie.title}
+                                    </p>
+                                </div>
+                        </Link>
+                    </div>
+                )
+            })
+    
+            return trendingMovie;
+        }
     }
+
+    let list;
+    let displayMovie;
+
+    if (data) {
+        var splitArray = data.split("\r\n\r\n");
+        const headers = splitArray[0];
+        const body = splitArray[1];
+        // setData1(JSON.parse(body));
+        list = JSON.parse(body);
+        console.log(list)
+        displayMovie = renderMovie(list)
+    }
+    
 
     return(
         <HomeBody>
             <div className="card-group">
-                {renderMovie()}
+                {displayMovie}
             </div>
             <HomeNews/>
         </HomeBody>
