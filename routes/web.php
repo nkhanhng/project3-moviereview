@@ -70,4 +70,4 @@ Route::middleware('auth')->prefix('/')->group(function() {
 
  	
 });
-Route::get('/api/v1/user', 'HomeController@user')->name('get.user');
+Route::get('/api/v1/user', 'HomeController@user');

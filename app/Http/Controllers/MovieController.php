@@ -46,19 +46,20 @@ class MovieController extends Controller
 
 	public function get($id){
 		$movie= Movie::find($id)->rates;
-		
 		return response()->json($movie);
 	}
 
 	public function setRate(Request $request){
-		
-		$setRate = $request->all();
-		$data= Movie::find($setRate['movie_id']);
-		$data['rate'] = ($data['rate']*$data['vote']+$data['rate'])/($data['vote']+1);
-		$data['vote'] =  $data['vote']+1;
-		$data->save();
-		Rate::create($setRate);
-		return "success";
+		if (Auth::check()) {
+            $setRate = $request->all();
+			$data= Movie::find($setRate['movie_id']);
+			$data['rate'] = ($data['rate']*$data['vote']+$data['rate'])/($data['vote']+1);
+			$data['vote'] =  $data['vote']+1;
+			$data->save();
+			Rate::create($setRate);
+			return "success";
+        }
+        return 'error';
 	}
 
 	public function store(Request $request){
