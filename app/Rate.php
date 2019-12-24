@@ -8,6 +8,6 @@ class Rate extends Model
 {
     protected $table="rates";
     protected $fillable = [
-       'score', 'comment','movie_id'
+       'score', 'comment','movie_id','user_id'
     ];
 }
