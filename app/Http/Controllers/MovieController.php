@@ -28,12 +28,12 @@ class MovieController extends Controller
 		->editColumn('image',function(Movie $movie){
 			return '<img src="'.$movie->image.'" class="image-movie" />';
 		})
-		->editColumn('status',function($movie){
-			if ($movie->status) {
-				return'<input type="radio"  checked="checked" disabled="disabled"/>';
-			}
-			return'<input type="radio"  disabled="disabled"/>';
-		})
+		->editColumn('status',function($datas){
+            if ($datas->status) {
+                return'<input type="checkbox"  onchange="setStatus('.$datas['id'].')" checked disabled />';
+            }
+            return'<input type="checkbox" onchange="setStatus('.$datas['id'].')" disabled />';
+        })
 		->rawColumns(['action','image','status'])
 		->setRowId('movies-{{$id}}')
 		->make(true);

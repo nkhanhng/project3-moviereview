@@ -29,12 +29,12 @@ private $server = 'https://api.themoviedb.org/3/movie/';
 		->editColumn('image',function(Movie $movie){
 			return '<img src="'.$movie->image.'" class="image-movie" />';
 		})
-		->editColumn('status',function($movie){
-			if ($movie->status) {
-				return'<input type="radio" name="'.$movie->status.'" checked="checked" onchange="setStatus('.$movie['id'].')" />';
-			}
-			return'<input type="radio" name="'.$movie->status.'" onchange="setStatus('.$movie['id'].')"/>';
-		})
+		->editColumn('status',function($datas){
+            if ($datas->status) {
+                return'<input type="checkbox"  onchange="setStatus('.$datas['id'].')" checked/>';
+            }
+            return'<input type="checkbox" onchange="setStatus('.$datas['id'].')"/>';
+        })
 		->rawColumns(['action','image','status'])
 		->setRowId('movies-{{$id}}')
 		->make(true);
