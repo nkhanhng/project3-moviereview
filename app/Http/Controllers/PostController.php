@@ -13,7 +13,7 @@ class PostController extends Controller
     }
     public function anyData(){
     
-        $datas = Post::select('posts.*')->where('user_id',Auth::id())->orderBy('status', 'desc');
+        $datas = Post::select('posts.*');
         return Datatables::of($datas)
         ->addColumn('action', function ($datas) {
             return'
@@ -22,21 +22,18 @@ class PostController extends Controller
             ';
             
         })
-        ->editColumn('image', '<img src="{{$image}}" class="image-movie" />')
-        ->editColumn('status',function($datas){
-            if ($datas->status) {
-                return'<input type="checkbox"  onchange="setStatus('.$datas['id'].')" checked disabled />';
+        ->editColumn('image', '<img src="{{$image}}"/>')
+        ->editColumn('status',function($movie){
+            if ($movie->status) {
+                return'<input type="radio"  checked="checked" disabled="disabled"/>';
             }
-            return'<input type="checkbox" onchange="setStatus('.$datas['id'].')" disabled />';
+            return'<input type="radio"  disabled="disabled"/>';
         })
         ->setRowId('posts-{{$id}}')
         ->rawColumns(['action','image','status'])
         ->make(true);
 }
-public function data(){
-        $movies = Post::select('posts.*')->where('status',1)->orderBy('updated_at', 'desc');
-         return  response()->json(Datatables::of($movies));
-    }
+
     public function getPost($id){
         $data=Post::find($id);
         return response()->json($data);
@@ -57,19 +54,15 @@ public function data(){
         return "true";
     
     }
-    public function update(PostUpdateRequest $request) {
+    public function updatePost(PostUpdateRequest $request) {
         $id=$request->only(['id']);
+        $image=$request->only(['image']);
         $data=$request->only(['title','description','content']);
-         if ($request->hasFile('image')) {
-        $image=$request->file('image');
-            $data['image']= 'http://'.request()->getHttpHost().'/images/post/'.time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images/post'), $data['image']);
+         if (!isempty($request['images'])) {
+            $data['iamge']= 'http://'.request()->getHttpHost().'/images/post/'.time().$key.'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images/post'), $imageName);
         }
         $boolean=Post::where('id',$id)->update($data);
             return "true";
-    }
-    public function delete($id){
-        Post::find($id)->delete();
-        return response()->json(true);
     }
 }

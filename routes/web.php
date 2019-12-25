@@ -68,6 +68,19 @@ Route::middleware('auth')->prefix('/')->group(function() {
 	Route::delete('/post/{id}', 'PostController@delete');
 
 
- 	
+	
 });
-Route::get('/api/v1/user', 'HomeController@user');
+
+Route::prefix('/api/v1')->group(function() {
+	
+	Route::get('/user', 'HomeController@user');
+
+
+	 // set rate 
+	 // http://localhost:8000/api/v1/movie/
+	 // yeu cau 3 truong du lieu
+	 // score
+	 // movie_id
+	 // comment
+	Route::post('/movie/rate', 'MovieController@setRate')->name('rate.api');
+}
