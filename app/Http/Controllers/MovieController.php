@@ -51,9 +51,10 @@ class MovieController extends Controller
 
 	public function setRate(Request $request){
 		if (Auth::check()) {
-            $setRate = $request->all();
+			$setRate = $request->only(['score','comment','movie_id']);
+			$setRate['user_id']=Auth::id();
 			$data= Movie::find($setRate['movie_id']);
-			$data['rate'] = ($data['rate']*$data['vote']+$data['rate'])/($data['vote']+1);
+			$data['rate'] = ($data['rate']*$data['vote']+$setRate['score'])/($data['vote']+1);
 			$data['vote'] =  $data['vote']+1;
 			$data->save();
 			Rate::create($setRate);

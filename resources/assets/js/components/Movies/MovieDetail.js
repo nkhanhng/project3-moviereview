@@ -25,12 +25,10 @@ const MovieDetail = props => {
         e.preventDefault();
         axios.post(`${config.BACKEND_DOMAIN}/api/v1/movie/rate`,{
             'movie_id': movId,
-            'score': rate,
-            'comment': comment,
-            'user_id': 1
+            'score': parseInt(rate),
+            'comment': comment
         }).then(data => console.log(data))
         .catch(err => console.log(err))
-
     }
 
     const renderGenres = () => {

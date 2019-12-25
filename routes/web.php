@@ -71,3 +71,11 @@ Route::middleware('auth')->prefix('/')->group(function() {
  	
 });
 Route::get('/api/v1/user', 'HomeController@user');
+ // set rate 
+ // http://localhost:8000/api/v1/movie/
+ // yeu cau 3 truong du lieu
+ // score
+ // movie_id
+ // comment
+ // 
+ Route::post('/api/v1/movie/rate', 'MovieController@setRate')->name('rate.api');

@@ -84830,9 +84830,8 @@ var MovieDetail = function MovieDetail(props) {
         e.preventDefault();
         __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__config_config_json___default.a.BACKEND_DOMAIN + "/api/v1/movie/rate", {
             'movie_id': movId,
-            'score': rate,
-            'comment': comment,
-            'user_id': 1
+            'score': parseInt(rate),
+            'comment': comment
         }).then(function (data) {
             return console.log(data);
         }).catch(function (err) {
