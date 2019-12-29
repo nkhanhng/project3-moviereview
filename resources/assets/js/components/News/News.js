@@ -1,66 +1,88 @@
-import React, { useEffect, useState } from "react";
-import config from "../../config/config.json";
-import { useParams } from "react-router";
-import "./detail.css"
-import Credits from "./Credits.js";
+import React, { useEffect, useState } from 'react';
+import config from '../../config/config.json';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const MovieDetail = props => {
-    const [data, setData] = useState([]);
-    let { id } = useParams();
+
+const News = props => {
+    const [data, setData] = useState('')
+    const [showModal, setShowModal] = useState(false)
+    useEffect(() => {
+        // fetch(`${config.BACKEND_DOMAIN}/api/v1/movie/data?draw=1&start=0&length=10`,{
+        //     headers:{
+        //         "Content-Type": "application/json"
+        //     }
+        // })
+        // .then(res => {
+        //     res.json()
+        //     .then((data)=> setData(data.results))
+        // })
+        axios.get(`${config.BACKEND_DOMAIN}/api/v1/post/data?draw=1&start=0&length=10`)
+            .then(data => setData(data.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    const renderNews = (data1) => {
+        if (data1) {
+            const newsList = data1.data.map((news) => {
+                return (
+                    <div key={news.id} className="card" 
+                        style={{ width: '960px', margin: "auto", marginBottom: "20px" }} 
+                        onClick={() => setShowModal(true)}
+                    >
+                        <Link to={{
+                            pathname: `/news/${news.id}`,
+                            state: {
+                                title: news.title,
+                                img: news.image,
+                                des: news.description,
+                                content: news.content,
+                                date: news.updated_at
+                            }
+                        }}>
+                            <img className="card-img-top" src={news.image} alt={news.title}></img>
+                            <div className="card-body">
+                                <h5 className="card-title">{news.title}</h5>
+                                <p className="card-text">
+                                    {news.description}
+                                </p>
+                            </div>
+                            <div className="card-footer">
+                                <small className="text-muted">{news.updated_at}</small>
+                            </div>
+                        </Link>
+                    </div>
+                )
+            })
+            return newsList;
+        }
+    }
+
+    let list;
+    let displayNews;
+
+    if (data) {
+        var splitArray = data.split("\r\n\r\n");
+        const headers = splitArray[0];
+        const body = splitArray[1];
+        // setData1(JSON.parse(body));
+        list = JSON.parse(body);
+        console.log(list)
+        displayNews = renderNews(list)
+    }
 
     return (
         <div className="container">
-            <img
-                src={`https://image.tmdb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
-                className="movie-banner"
-                alt="Responsive image"
-            />
-            <div className="movie-detail container">
-                <div className="poster-info">
-                    <div>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`}
-                            alt="poster"
-                        />
-                    </div>
-                    <div className="movie-info">
-                        <h3>Infomation</h3>
-                        <div>
-                            <Credits renderGenres={renderGenres} info={data} id={id}/>
-                        </div>
-                    </div>
+            <h3>News</h3>
+            {data
+                ?
+                <div className="row row-cols-1 row-cols-md-3">
+                    {displayNews}
                 </div>
-                <div className="movie-review">
-                    <h3 className="movie-title">{data.original_title}</h3>
-                    {data ? renderGenres() : null}
-                    <h4>Overview</h4>
-                    <div className="movie-des">
-                        {data.overview}
-                    </div>
-                    <div className="rate-review">
-                        <form>
-                            <h4>Danh gia</h4>
-                            <option>
-                            <select>
-                                <option value="grapefruit">Grapefruit</option>
-                                <option value="lime">Lime</option>
-                                <option selected value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
-                                <option value="grapefruit">Grapefruit</option>
-                                <option value="lime">Lime</option>
-                                <option selected value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
-                                <option value="grapefruit">Grapefruit</option>
-                                <option value="lime">Lime</option>
-                            </select>
-                            </option>
-                            <textarea type="text" name="comment" placeholder="Binh luan" />
-                        </form>
-                    </div>
-                </div>
-            </div>
+                : <div>Loading news...</div>
+            }
         </div>
-    );
-};
+    )
+}
 
-export default MovieDetail;
+export default News;

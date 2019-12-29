@@ -5,6 +5,9 @@ import Header from "./components/Header/header";
 import Movies from "./components/Movies/Movies";
 import HomePage from "./components/Home/HomePage";
 import MovieDetail from "./components/Movies/MovieDetail";
+import News from './components/News/News';
+import NewsDetail from './components/News/NewsDetail';
+import Footer from "./components/Footer/Footer";
 
 function App() {
     return (
@@ -19,10 +22,12 @@ function App() {
                         <Movies/>
                     </Route>
                     <Route exact path="/news">
-                        {/* <MovieDetail /> */}
+                        <News/>
                     </Route>
                     <Route exact path="/movie/:id" component={MovieDetail}/>
+                    <Route exact path="/news/:id" component={NewsDetail}/>
                 </Switch>
+                <Footer/>
             </Router>
         </div>
     );

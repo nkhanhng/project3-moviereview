@@ -8,8 +8,9 @@ import Comments from './Comments';
 
 const MovieDetail = props => {
     const [data, setData] = useState('');
-    const [rate, setRate] = useState('');
+    const [rate, setRate] = useState(1);
     const [comment, setComment] = useState('');
+    const [res,setRes] = useState('');
     const { movId } = props.location.state
 
     let { id } = useParams();
@@ -27,9 +28,11 @@ const MovieDetail = props => {
             'movie_id': movId,
             'score': parseInt(rate),
             'comment': comment
-        }).then(data => console.log(data))
+        }).then(data => setRes(data.data))
         .catch(err => console.log(err))
     }
+
+    console.log(res);
 
     const renderGenres = () => {
         if(data.genres){
@@ -93,7 +96,7 @@ const MovieDetail = props => {
                             <input type="submit" value="Submit" />
                         </form>
                     </div>
-                    <Comments/>
+                    <Comments movieId={movId} res={res} setRes={setRes}/>
                 </div>
             </div>
         </div>

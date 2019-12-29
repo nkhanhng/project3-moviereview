@@ -6,10 +6,13 @@ const Comments = props => {
     const [data, setData] = useState('')
     const [showModal, setShowModal] = useState(false)
     useEffect(() => {
-        axios.get(`${config.BACKEND_DOMAIN}/api/v1/movie/1`)
-            .then(data => setData(data.data))
+        axios.get(`${config.BACKEND_DOMAIN}/api/v1/movie/${props.movieId}`)
+            .then(data => {
+                setData(data.data)
+                props.setRes('')
+            })
             .catch(err => console.log(err))
-    }, [])
+    }, [props.res])
 
     const renderComments = () => {
         if(data){

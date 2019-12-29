@@ -36,8 +36,8 @@ const Header = props => {
                                 Movies <span className="sr-only">(current)</span>
                             </Link>
                         </li>
-                        <li className="nav-item" to="/news">
-                            <Link className="nav-link">
+                        <li className="nav-item">
+                            <Link className="nav-link"  to="/news">
                                 News
                             </Link>
                         </li>
