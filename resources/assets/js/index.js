@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header/header";
 import Movies from "./components/Movies/Movies";
+import MoviesInDb from "./components/Movies/MoviesInDb";
 import HomePage from "./components/Home/HomePage";
 import MovieDetail from "./components/Movies/MovieDetail";
 import News from './components/News/News';
@@ -18,8 +19,8 @@ function App() {
                     <Route exact path="/">
                         <HomePage/>
                     </Route>
-                    <Route exact path="/movies">
-                        <Movies/>
+                    <Route exact path="/listmovies">
+                        <MoviesInDb/>
                     </Route>
                     <Route exact path="/news">
                         <News/>

@@ -18,7 +18,7 @@ const HomePage = props => {
         if(list){
             const trendingMovie = list.data.map((movie)=>{
                 return(
-                    <div key={movie.id} className="card" style={{width: "18rem"}}>
+                    <div key={movie.id} className="card" style={{width: "18rem", marginBottom: "20px"}}>
                         <Link to={{
                             pathname: `/movie/${movie.key}`,
                             state:{
@@ -57,7 +57,7 @@ const HomePage = props => {
 
     return(
         <HomeBody>
-            <div className="row row-cols-1 row-cols-md-3">
+            <div className="row row-cols-1 row-cols-md-3" style={{justifyContent: "space-between"}}>
                 {displayMovie}
             </div>
             <HomeNews/>

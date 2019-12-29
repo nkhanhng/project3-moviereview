@@ -95,6 +95,9 @@ const MovieDetail = props => {
                             <textarea type="text" name="comment" placeholder="Binh luan" onChange={(e)=>setComment(e.target.value)} />
                             <input type="submit" value="Submit" />
                         </form>
+                        {res === 'error'
+                        ? alert("You need to login to review this movie")
+                        : null}
                     </div>
                     <Comments movieId={movId} res={res} setRes={setRes}/>
                 </div>
