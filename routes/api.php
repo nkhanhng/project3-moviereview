@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::prefix('/v1')->group(function() {
  Route::get('/movie/data', 'MovieController@data')->name('list.data.api');
-
+ 		
 
  Route::get('/post/data', 'PostController@data')->name('post.api');
 
