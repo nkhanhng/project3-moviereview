@@ -36,6 +36,13 @@
     border-radius: 10px;
 }
 
+.review{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid;
+    padding-top: 10px;
+}
+
 .review .info{
     display: flex;
 }
@@ -52,4 +59,8 @@
     padding: 2px 10px;
     border-radius: 4px;
     margin-left: 20px;
+}
+
+.review .info .review-content{
+    font-size: 18px;
 }

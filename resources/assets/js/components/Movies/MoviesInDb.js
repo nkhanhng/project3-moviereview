@@ -4,6 +4,7 @@ import config from "../../config/config.json";
 import Pagination from "react-js-pagination";
 import { Link} from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import "./style.css"
 
 const Movies = props => {
     const [data, setData] = useState([]);

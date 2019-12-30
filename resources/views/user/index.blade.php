@@ -18,7 +18,7 @@
 @endsection
 @section('content')
 
-<div class="container" style="width:100%">
+<div class="" style="width:100%">
   <h2>Movies Manage of User</h2>
   <br />
 

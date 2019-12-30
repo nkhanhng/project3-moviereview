@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link} from 'react-router-dom';
 import config from '../../config/config.json'
+import axios from 'axios';
+import "./header.css";
 
 const Header = props => {
-    const [data, setData] = useState('')
+    const [data, setData] = useState('');
+    const [searchResult, setResult] = useState('');
+    const [query, setQuery] = useState('')
     useEffect(() => {
         fetch(`${config.BACKEND_DOMAIN}/api/v1/user`)
         .then(res => {
@@ -11,6 +15,17 @@ const Header = props => {
             .then((data)=> setData(data))
         })
     },[])
+
+    const handleSubmit = () => {
+        if(query){
+            axios.get(`${config.MOVIEDB_URL}/search/movie?api_key=${config.API_KEY}&language=en-US&page=1&query=${query}`)
+                .then(res => {
+                    setResult(res.data)
+                })
+                .catch(err => console.log(err))
+        }
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
@@ -64,10 +79,23 @@ const Header = props => {
                         </li>
                         }
                     </ul>
-                    {/* <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> */}
+                    <form className="form-inline my-2 my-lg-0">
+                        <input 
+                            className="form-control mr-sm-2" 
+                            onChange={(e)=>setQuery(e.target.value)} 
+                            type="search"
+                            placeholder="Search" 
+                            aria-label="Search">
+                        </input>
+                        <Link to={{
+                            pathname: `/search/${query}`,
+                            state:{
+                                searchResult
+                            }
+                        }}>
+                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </Link>
+                    </form>
                 </div>
             
         </nav>

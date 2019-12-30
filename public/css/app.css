@@ -11940,3 +11940,9 @@ a.text-dark:focus {
   text-align: center;
 }
 
+.App nav {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+}
+

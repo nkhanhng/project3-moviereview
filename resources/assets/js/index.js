@@ -27,6 +27,7 @@ function App() {
                     </Route>
                     <Route exact path="/movie/:id" component={MovieDetail}/>
                     <Route exact path="/news/:id" component={NewsDetail}/>
+                    <Route exact path="/search/:search" component={Movies}/>
                 </Switch>
                 <Footer/>
             </Router>

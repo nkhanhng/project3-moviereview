@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import config from '../../config/config.json';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import Loading from '../Loading/Loading';
 
 const News = props => {
     const [data, setData] = useState('')
@@ -17,7 +17,7 @@ const News = props => {
         //     res.json()
         //     .then((data)=> setData(data.results))
         // })
-        axios.get(`${config.BACKEND_DOMAIN}/api/v1/post/data?draw=1&start=0&length=10`)
+        axios.get(`${config.BACKEND_DOMAIN}/api/v1/post/data?draw=1&start=0&length=30`)
             .then(data => setData(data.data))
             .catch(err => console.log(err))
     }, [])
@@ -79,7 +79,7 @@ const News = props => {
                 <div className="row row-cols-1 row-cols-md-3">
                     {displayNews}
                 </div>
-                : <div>Loading news...</div>
+                : <Loading/>
             }
         </div>
     )
