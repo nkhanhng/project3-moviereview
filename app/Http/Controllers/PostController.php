@@ -12,7 +12,7 @@ class PostController extends Controller
     	return view('posts.index',);
     }
     public function anyData(){
-    
+        
         $datas = Post::select('posts.*');
         return Datatables::of($datas)
         ->addColumn('action', function ($datas) {
@@ -32,7 +32,11 @@ class PostController extends Controller
         ->setRowId('posts-{{$id}}')
         ->rawColumns(['action','image','status'])
         ->make(true);
-}
+    }
+    public function data(){
+        $posts = Post::select('posts.*')->orderBy('updated_at', 'desc');
+        return  response()->json(Datatables::of($posts));
+    }
 
     public function getPost($id){
         $data=Post::find($id);
@@ -52,17 +56,17 @@ class PostController extends Controller
         $image->move(public_path('images/post'), $data['image']);
         Post::create($data);
         return "true";
-    
+        
     }
     public function updatePost(PostUpdateRequest $request) {
         $id=$request->only(['id']);
         $image=$request->only(['image']);
         $data=$request->only(['title','description','content']);
-         if (!isempty($request['images'])) {
+        if (!isempty($request['images'])) {
             $data['iamge']= 'http://'.request()->getHttpHost().'/images/post/'.time().$key.'.'.$image->getClientOriginalExtension();
             $image->move(public_path('images/post'), $imageName);
         }
         $boolean=Post::where('id',$id)->update($data);
-            return "true";
+        return "true";
     }
 }
