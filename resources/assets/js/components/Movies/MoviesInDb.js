@@ -3,6 +3,7 @@ import MovieList from "./MovieList";
 import config from "../../config/config.json";
 import Pagination from "react-js-pagination";
 import { Link} from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 const Movies = props => {
     const [data, setData] = useState([]);
@@ -93,7 +94,7 @@ const Movies = props => {
             {displayMovie
             ?
                 <div className="row row-cols-1 row-cols-md-3">{displayMovie}</div>
-            :   <div>Loading...</div>
+            :   <Loading/>
             }
             {totalResult
             ?
@@ -105,7 +106,7 @@ const Movies = props => {
                         onChange={callApi}
                     />
                 </div>
-            :   <div>Loading...</div>
+            :   <Loading/>
             }
         </MovieList>
     );

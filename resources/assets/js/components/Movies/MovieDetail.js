@@ -5,6 +5,7 @@ import "./detail.css"
 import Credits from "./Credits.js";
 import axios from 'axios';
 import Comments from './Comments';
+import Loading from '../Loading/Loading';
 
 const MovieDetail = props => {
     const [data, setData] = useState('');
@@ -49,60 +50,67 @@ const MovieDetail = props => {
     }
 
     return (
-        <div className="container">
-            <img
-                src={`https://image.tmdb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
-                className="movie-banner"
-                alt="Responsive image"
-            />
-            <div className="movie-detail container">
-                <div className="poster-info">
-                    <div>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`}
-                            alt="poster"
-                        />
-                    </div>
-                    <div className="movie-info">
-                        <h3>Infomation</h3>
+        <React.Fragment>
+            {data
+            ?
+            <div className="container">
+                <img
+                    src={`https://image.tmdb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
+                    className="movie-banner"
+                    alt="Responsive image"
+                />
+                <div className="movie-detail container">
+                    <div className="poster-info">
                         <div>
-                            <Credits renderGenres={renderGenres} info={data} id={id}/>
+                            <img
+                                src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`}
+                                alt="poster"
+                            />
+                        </div>
+                        <div className="movie-info">
+                            <h3>Infomation</h3>
+                            <div>
+                                <Credits renderGenres={renderGenres} info={data} id={id}/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="movie-review">
-                    <h3 className="movie-title">{data.original_title}</h3>
-                    {data ? renderGenres() : null}
-                    <h4>Overview</h4>
-                    <div className="movie-des">
-                        {data.overview}
+                    <div className="movie-review">
+                        <h3 className="movie-title">{data.original_title}</h3>
+                        {data ? renderGenres() : null}
+                        <h4>Overview</h4>
+                        <div className="movie-des">
+                            {data.overview}
+                        </div>
+                        <div className="rate-review">
+                            <form onSubmit={(e)=>handleSubmit(e)}>
+                                <h4>Danh gia</h4>
+                                    <select value={rate} onChange={(e)=>setRate(e.target.value)}>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                <textarea type="text" name="comment" placeholder="Binh luan" onChange={(e)=>setComment(e.target.value)} />
+                                <input type="submit" value="Submit" />
+                            </form>
+                            {res === 'error'
+                            ? alert("You need to login to review this movie")
+                            : null}
+                        </div>
+                        <Comments movieId={movId} res={res} setRes={setRes}/>
                     </div>
-                    <div className="rate-review">
-                        <form onSubmit={(e)=>handleSubmit(e)}>
-                            <h4>Danh gia</h4>
-                                <select value={rate} onChange={(e)=>setRate(e.target.value)}>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
-                            <textarea type="text" name="comment" placeholder="Binh luan" onChange={(e)=>setComment(e.target.value)} />
-                            <input type="submit" value="Submit" />
-                        </form>
-                        {res === 'error'
-                        ? alert("You need to login to review this movie")
-                        : null}
-                    </div>
-                    <Comments movieId={movId} res={res} setRes={setRes}/>
                 </div>
             </div>
-        </div>
+            :
+                <Loading/>
+            }
+        </React.Fragment>
     );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import config from '../../config/config.json';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap'
+import Loading from '../Loading/Loading';
 
 const HomeNews = props => {
     const [data, setData] = useState('')
@@ -77,9 +78,13 @@ const HomeNews = props => {
     return (
         <div className="">
             <h3>News</h3>
-            <div className="card-group">
-                {displayNews}
-            </div>
+            {displayNews
+            ?
+                <div className="card-group">
+                    {displayNews}
+                </div>
+            :   <Loading/>
+            }
         </div>
     )
 }

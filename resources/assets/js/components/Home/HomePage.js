@@ -3,7 +3,7 @@ import { Link} from 'react-router-dom';
 import HomeBody from './Home';
 import config from '../../config/config.json'
 import HomeNews from './HomeNews';
-
+import Loading from '../Loading/Loading';
 
 const HomePage = props => {
     const [data, setData] = useState('')
@@ -57,9 +57,13 @@ const HomePage = props => {
 
     return(
         <HomeBody>
-            <div className="row row-cols-1 row-cols-md-3" style={{justifyContent: "space-between"}}>
-                {displayMovie}
-            </div>
+            {displayMovie
+            ?
+                <div className="row row-cols-1 row-cols-md-3" style={{justifyContent: "space-between"}}>
+                    {displayMovie}
+                </div>
+            :   <Loading/>
+            }
             <HomeNews/>
         </HomeBody>
     )
