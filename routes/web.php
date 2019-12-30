@@ -83,4 +83,4 @@ Route::prefix('/api/v1')->group(function() {
 	 // movie_id
 	 // comment
 	Route::post('/movie/rate', 'MovieController@setRate')->name('rate.api');
-}
+});

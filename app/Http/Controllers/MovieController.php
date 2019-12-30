@@ -45,7 +45,7 @@ class MovieController extends Controller
 	}
 
 	public function get($id){
-		$movie= Rate::where('movie_id',$id)->rates;
+		$movie= Rate::where('movie_id',$id)->with('user')->get();
 		return response()->json($movie);
 	}
 
