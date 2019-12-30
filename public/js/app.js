@@ -85669,7 +85669,7 @@ var MovieDetail = function MovieDetail(props) {
         null,
         data ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            { className: "container" },
+            { className: "wrapper" },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
                 src: "https://image.tmdb.org/t/p/w1066_and_h600_bestv2/" + data.backdrop_path,
                 className: "movie-banner",
@@ -85677,7 +85677,7 @@ var MovieDetail = function MovieDetail(props) {
             }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
-                { className: "movie-detail container" },
+                { className: "movie-detail" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "poster-info" },
@@ -85737,65 +85737,85 @@ var MovieDetail = function MovieDetail(props) {
                                 "Danh gia"
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "select",
-                                { value: rate, onChange: function onChange(e) {
-                                        return setRate(e.target.value);
-                                    } },
+                                "div",
+                                { style: { display: "flex" } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "1" },
-                                    "1"
+                                    "div",
+                                    { "class": "input-group mb-3 score" },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        "div",
+                                        { "class": "input-group-prepend" },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "label",
+                                            { "class": "input-group-text", htmlFor: "inputGroupSelect01" },
+                                            "Score"
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        "select",
+                                        { "class": "custom-select", id: "inputGroupSelect01" },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { defaultValue: rate },
+                                            "Choose..."
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "1" },
+                                            "1"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "2" },
+                                            "2"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "3" },
+                                            "3"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "4" },
+                                            "4"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "5" },
+                                            "5"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "6" },
+                                            "6"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "7" },
+                                            "7"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "8" },
+                                            "8"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "9" },
+                                            "9"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "option",
+                                            { value: "10" },
+                                            "10"
+                                        )
+                                    )
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "2" },
-                                    "2"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "3" },
-                                    "3"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "4" },
-                                    "4"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "5" },
-                                    "5"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "6" },
-                                    "6"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "7" },
-                                    "7"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "8" },
-                                    "8"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "9" },
-                                    "9"
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "option",
-                                    { value: "10" },
-                                    "10"
-                                )
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", { type: "text", name: "comment", placeholder: "Binh luan", onChange: function onChange(e) {
-                                    return setComment(e.target.value);
-                                } }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "submit", value: "Submit" })
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", { type: "text", className: "comment", name: "comment", placeholder: "Comment", onChange: function onChange(e) {
+                                        return setComment(e.target.value);
+                                    } }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "submit", value: "Submit" })
+                            )
                         ),
                         res === 'error' ? alert("You need to login to review this movie") : null
                     ),
@@ -85817,7 +85837,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, ".movie-banner{\r\n    height: 480px;\r\n    width: 1024px;\r\n    margin: 10px 0;\r\n}\r\n\r\n.movie-detail{\r\n    display: flex;\r\n}\r\n\r\n.poster-info{\r\n    margin-right: 20px;\r\n}", ""]);
+exports.push([module.i, ".movie-banner{\r\n    height: 480px;\r\n    width: 100%;\r\n    margin: 10px 0;\r\n}\r\n\r\n.movie-detail{\r\n    display: flex;\r\n}\r\n\r\n.poster-info{\r\n    margin-right: 20px;\r\n}\r\n\r\n.wrapper{\r\n    margin-right: auto;\r\n    margin-left:  auto;\r\n    max-width: 1440px;\r\n    padding-right: 10px;\r\n    padding-left:  10px;\r\n}\r\n\r\n.rate-review{\r\n    margin-top: 30px;\r\n    margin-bottom: 30px;\r\n}\r\n\r\n.score{\r\n    width: 300px;\r\n}\r\n\r\n.comment{\r\n    width: 100%;\r\n    margin-left: 20px;\r\n    margin-right: 20px;\r\n    border-radius: 10px;\r\n}\r\n\r\n.review .info{\r\n    display: flex;\r\n}\r\n\r\n.review .info .review-user{\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n}\r\n\r\n.review .info .review-score{\r\n    display: inline-block;\r\n    background-color: #303840;\r\n    color: #bcd;\r\n    padding: 2px 10px;\r\n    border-radius: 4px;\r\n    margin-left: 20px;\r\n}", ""]);
 
 // exports
 
@@ -85946,17 +85966,31 @@ var Comments = function Comments(props) {
             var commentList = data.map(function (comment) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    null,
+                    { key: comment.id, className: 'review' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        null,
-                        'Score: ',
-                        comment.score
+                        { className: 'info' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'review-user' },
+                            comment.user.name
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'review-score' },
+                            'Score: ',
+                            comment.score,
+                            '/10'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'small',
+                        { style: { color: "#525252", fontStyle: "italic" } },
+                        comment.created_at
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        null,
-                        'Comment: ',
+                        { className: 'review-content' },
                         comment.comment
                     )
                 );

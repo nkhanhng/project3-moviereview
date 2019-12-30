@@ -1,6 +1,6 @@
 .movie-banner{
     height: 480px;
-    width: 1024px;
+    width: 100%;
     margin: 10px 0;
 }
 
@@ -10,4 +10,46 @@
 
 .poster-info{
     margin-right: 20px;
+}
+
+.wrapper{
+    margin-right: auto;
+    margin-left:  auto;
+    max-width: 1440px;
+    padding-right: 10px;
+    padding-left:  10px;
+}
+
+.rate-review{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.score{
+    width: 300px;
+}
+
+.comment{
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.review .info{
+    display: flex;
+}
+
+.review .info .review-user{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.review .info .review-score{
+    display: inline-block;
+    background-color: #303840;
+    color: #bcd;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin-left: 20px;
 }

@@ -18,9 +18,17 @@ const Comments = props => {
         if(data){
             const commentList = data.map((comment)=>{
                 return(
-                    <div>
-                        <div>Score: {comment.score}</div>
-                        <div>Comment: {comment.comment}</div>
+                    <div key={comment.id} className="review">
+                        <div className="info">
+                            <div className="review-user">
+                                {comment.user.name}
+                            </div>
+                            <div className="review-score">Score: {comment.score}/10</div>
+                        </div>
+                        <small style={{color:"#525252", fontStyle:"italic"}}>
+                            {comment.created_at}
+                        </small>
+                        <div className="review-content">{comment.comment}</div>
                     </div>
                 )
             })

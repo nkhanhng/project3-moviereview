@@ -53,13 +53,13 @@ const MovieDetail = props => {
         <React.Fragment>
             {data
             ?
-            <div className="container">
+            <div className="wrapper">
                 <img
                     src={`https://image.tmdb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
                     className="movie-banner"
                     alt="Responsive image"
                 />
-                <div className="movie-detail container">
+                <div className="movie-detail">
                     <div className="poster-info">
                         <div>
                             <img
@@ -84,7 +84,29 @@ const MovieDetail = props => {
                         <div className="rate-review">
                             <form onSubmit={(e)=>handleSubmit(e)}>
                                 <h4>Danh gia</h4>
-                                    <select value={rate} onChange={(e)=>setRate(e.target.value)}>
+                                <div style={{display: "flex"}}>
+                                    <div class="input-group mb-3 score">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" htmlFor="inputGroupSelect01">Score</label>
+                                        </div>
+                                        <select class="custom-select" id="inputGroupSelect01">
+                                            <option defaultValue={rate}>Choose...</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                    <textarea type="text" className="comment" name="comment" placeholder="Comment" onChange={(e)=>setComment(e.target.value)} />
+                                    <input type="submit" value="Submit" />
+                                </div>
+                                    {/* <select value={rate} onChange={(e)=>setRate(e.target.value)}>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -95,9 +117,8 @@ const MovieDetail = props => {
                                         <option value="8">8</option>
                                         <option value="9">9</option>
                                         <option value="10">10</option>
-                                    </select>
-                                <textarea type="text" name="comment" placeholder="Binh luan" onChange={(e)=>setComment(e.target.value)} />
-                                <input type="submit" value="Submit" />
+                                    </select> */}
+                               
                             </form>
                             {res === 'error'
                             ? alert("You need to login to review this movie")
